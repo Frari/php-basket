@@ -3,24 +3,34 @@ Potete inizialmente stamparli come le card uno sotto (o a fianco) all'altro e po
 <?php
   // generatore codice alfanumerico
   $permitted_chars = '0123456789abcdefghijklmnopqrstuvwxyz';
-  $code = substr(str_shuffle($permitted_chars), 0, 6);
-  // generatore punti
-  $punti = rand(0, 30);
-  // generatore rimbalzi
-  $rimbalzi = rand(0, 30);
-  // generatore % da due punti
-  $perc_2punti = rand(1, 100);
-  // generatore % da tre punti
-  $perc_3punti = rand(1, 100);
 
   // array scheda giocatore
-  $scheda = [
-    'codice' => $code,
-    'punti' => $punti,
-    'rimbalzi'=>$rimbalzi,
-    '% da 2 punti' => $perc_2punti,
-    '% da 3 punti' => $perc_3punti
-  ];
+
+  $scheda = [];
+
+  for ($i=0; count($scheda) < 20 ; $i++) {
+    $code = substr(str_shuffle($permitted_chars), 0, 6);
+    // generatore punti
+    $punti = rand(0, 30);
+    // generatore rimbalzi
+    $rimbalzi = rand(0, 30);
+    // generatore % da due punti
+    $perc_2punti = rand(1, 100);
+    // generatore % da tre punti
+    $perc_3punti = rand(1, 100);
+
+    if(!array_key_exists($code, $scheda)){
+      $scheda[$code] = [
+        'codice' => $code,
+        'punti' => $punti,
+        'rimbalzi'=>$rimbalzi,
+        '% da 2 punti' => $perc_2punti,
+        '% da 3 punti' => $perc_3punti
+      ];
+    }
+  }
+
+
  ?>
 
 <!DOCTYPE html>
@@ -31,12 +41,17 @@ Potete inizialmente stamparli come le card uno sotto (o a fianco) all'altro e po
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-    <div class="container">
+
     <?php
     foreach($scheda as $key => $value) { ?>
-    <p><?php echo $key.': '.$value;?></p>
-    <?php }
+       <div class="container">
+        <?php  echo 'CODICE:'.' '.$value['codice'].'<br>';
+        echo 'PUNTI:'.' '.$value['punti'].'<br>';
+        echo 'RIMBALZI:'.' '.$value['rimbalzi'].'<br>';
+        echo '% 2 PUNTI:'.' '.$value['% da 2 punti'].'<br>';
+        echo '% 3 PUNTI:'.' '.$value['% da 3 punti'].'<br>';?>
+       </div>
+     <?php }
     ?>
-    </div>
   </body>
 </html>
