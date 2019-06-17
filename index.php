@@ -16,8 +16,11 @@ Potete inizialmente stamparli come le card uno sotto (o a fianco) all'altro e po
   // array scheda giocatore
   $scheda = [
     'codice' => $code,
-    'rimbalzi' =>
-  ]
+    'punti' => $punti,
+    'rimbalzi'=>$rimbalzi,
+    '% da 2 punti' => $perc_2punti,
+    '% da 3 punti' => $perc_3punti
+  ];
  ?>
 
 <!DOCTYPE html>
@@ -28,6 +31,12 @@ Potete inizialmente stamparli come le card uno sotto (o a fianco) all'altro e po
     <link rel="stylesheet" href="style.css">
   </head>
   <body>
-
+    <div class="container">
+    <?php
+    foreach($scheda as $key => $value) { ?>
+    <p><?php echo $key.': '.$value;?></p>
+    <?php }
+    ?>
+    </div>
   </body>
 </html>
